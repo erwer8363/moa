@@ -1,0 +1,8 @@
+{
+  "name": "moa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/erwer8363/moa.git",
+  "author": "ever cz <czever2015@gmail.com>",
+  "license": "MIT"
+}
