@@ -7,7 +7,6 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const devMode = process.env.NODE_ENV !== 'production'
 
 module.exports = {
-    mode: "production",
     entry: './src/app.jsx',
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -20,14 +19,24 @@ module.exports = {
     },
     optimization: {
         splitChunks: {
+            chunks: 'async',
+            minSize: 30000,
+            maxSize: 0,
+            minChunks: 1,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            automaticNameDelimiter: '~',
+            automaticNameMaxLength: 30,
+            name: true,
             cacheGroups: {
-                commons: {
-                    // 选择全部chunk
-                    chunks: "all",
-                    // 生成的公共代码文件名，惯用vendor
-                    name: "vendor",
-                    // 作用于
-                    test: /[\\/]node_modules[\\/]/
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    priority: -10
+                },
+                default: {
+                    minChunks: 2,
+                    priority: -20,
+                    reuseExistingChunk: true
                 }
             }
         },

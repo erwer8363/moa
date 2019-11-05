@@ -4,5 +4,13 @@ module.exports = {
         "development": {
             "presets": [["@babel/preset-react", {"development": true}]]
         }
-    }
+    },
+    "plugins": [
+        [
+            "@babel/plugin-proposal-class-properties",
+            {
+                "loose": true
+            }
+        ]
+    ]
 }
