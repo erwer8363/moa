@@ -13,6 +13,13 @@ module.exports = {
         filename: "js/main.[hash:8].js",
         publicPath: "/"
     },
+    resolve: {
+        alias: {
+            page: path.resolve(__dirname, 'src/page')
+        },
+        extensions: [".jsx", ".js"]
+    },
+
     devServer: {
         contentBase: './dist',
         port: 3880
@@ -55,12 +62,13 @@ module.exports = {
                 }
             },
             {
-                test: /\.(sa|sc|c)ss$/,
+                test: /\.(le|sa|sc|c)ss$/,
                 use: [
                     devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
                     'css-loader',
                     'postcss-loader',
                     'sass-loader',
+                    'less-loader'
                 ]
             },
             {

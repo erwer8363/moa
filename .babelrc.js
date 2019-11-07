@@ -11,6 +11,14 @@ module.exports = {
             {
                 "loose": true
             }
+        ],
+        ["import",
+            {
+                "libraryName": "antd",
+                "libraryDirectory": "lib",
+                "style": true
+            },
+            "ant"
         ]
     ]
 }
