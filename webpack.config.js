@@ -17,7 +17,7 @@ module.exports = {
         alias: {
             page: path.resolve(__dirname, 'src/page')
         },
-        extensions: [".jsx", ".js"]
+        extensions: [".jsx", ".js", '.less ']
     },
 
     devServer: {
@@ -129,7 +129,8 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './src/index.html',
+            favicon: './favicon.ico'
         }),
         new MiniCssExtractPlugin({
             filename: devMode ? 'css/[name].css' : 'css/[name].[hash:8].css',
