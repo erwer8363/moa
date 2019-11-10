@@ -4,7 +4,7 @@
 import React, {Component} from 'react'
 import './index.less'
 import {Button, Layout} from 'antd'
-import NavTop from "../../component/nav-top";
+import NavTopWithRouter from "../../component/nav-top";
 import NavSide from "../../component/nav-side";
 import PageTitle from "../../component/page-title";
 
@@ -18,7 +18,7 @@ export default class Home extends Component {
     render() {
         return (
             <Layout style={{height: '100%'}}>
-                <NavTop/>
+                <NavTopWithRouter/>
                 <Layout>
                     <NavSide/>
                     <Layout style={{padding: '0 24px 24px'}}>

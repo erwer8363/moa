@@ -4,17 +4,29 @@
 import React, {Component} from 'react'
 import './index.less'
 import {Icon, Layout, Menu} from 'antd'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
+
+import {apiPostData} from 'api'
+import MUtil from 'util/mm'
 
 const {SubMenu} = Menu
 const {Header} = Layout
+const _mm = new MUtil()
 
-export default class NavTop extends Component {
+class NavTop extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            current: 'mail'
+            current: 'mail',
+            username: ''
         }
+    }
+
+    componentWillMount() {
+        const {username} = _mm.getStorage('userinfo')
+        this.setState({
+            username
+        })
     }
 
     handleClick = e => {
@@ -24,10 +36,18 @@ export default class NavTop extends Component {
         });
     }
     onLogOut = () => {
-        console.log('tuichu')
+        apiPostData({
+            url: '/user/logout.do'
+        }).then(res => {
+            if (res.status === 0) {
+                this.props.history.push('/login')
+                console.log('tuichu', res, this.props)
+            }
+        })
     }
 
     render() {
+        const {username} = this.state
         return (
             <Header className="header">
                 <Link className="logo" to='/'/>
@@ -54,7 +74,10 @@ export default class NavTop extends Component {
                     </SubMenu>
                     <SubMenu title={
                         <span className="submenu-title-wrapper">
-                                <Icon type="user"/>欢迎,Admin</span>
+                            {
+                                username ? <span><Icon type="user"/>欢迎,{username}</span> : <span>欢迎您,请登录</span>
+                            }
+                        </span>
                     }>
                         <Menu.Item key="state" onClick={this.onLogOut}>
                             <Icon type="poweroff"/>退出
@@ -65,3 +88,6 @@ export default class NavTop extends Component {
         )
     }
 }
+
+const NavTopWithRouter = withRouter(NavTop)
+export default NavTopWithRouter

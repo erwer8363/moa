@@ -15,14 +15,17 @@ module.exports = {
     },
     resolve: {
         alias: {
-            page: path.resolve(__dirname, 'src/page')
+            page: path.resolve(__dirname, 'src/page'),
+            api: path.resolve(__dirname, 'src/api'),
+            util: path.resolve(__dirname, 'src/util')
         },
-        extensions: [".jsx", ".js", '.less ']
+        extensions: [".jsx", ".js"]
     },
 
     devServer: {
-        contentBase: './dist',
-        port: 3880
+        historyApiFallback: true,
+        contentBase: path.join(__dirname, '../'),
+        port: 3001
     },
     optimization: {
         splitChunks: {
