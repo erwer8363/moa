@@ -3,24 +3,28 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import './indx.less'
-import WrappedNormalLogin from "page/login";
+import LayOut from "./component/layout";
 import Home from "page/home";
-
+import WrappedNormalLogin from 'page/login'
+import PageError from 'page/error'
 
 class App extends React.Component {
     render() {
+        let LayoutRouter = (
+            <LayOut>
+                <Switch>
+                    <Route exact path='/' component={Home}/>
+                    <Route component={PageError}/>
+                </Switch>
+            </LayOut>
+        )
         return (
             <Router>
                 <Switch>
-                    <Route exact path="/login" component={WrappedNormalLogin}/>
-                    <Route path='/' render={props => (
-                        <Switch>
-                            <Route exact path='/' component={Home}/>
-                        </Switch>
-                    )}/>
-                    <Redirect from='*' to='/login'/>
+                    <Route path='/login' component={WrappedNormalLogin}/>
+                    <Route path='/' render={props => LayoutRouter}/>
                 </Switch>
             </Router>
         )
