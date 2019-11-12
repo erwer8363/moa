@@ -3,10 +3,35 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import './indx.scss'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import './indx.less'
+import LayOut from "./component/layout";
+import Home from "page/home";
+import WrappedNormalLogin from 'page/login'
+import PageError from 'page/error'
+
+class App extends React.Component {
+    render() {
+        let LayoutRouter = (
+            <LayOut>
+                <Switch>
+                    <Route exact path='/' component={Home}/>
+                    <Route component={PageError}/>
+                </Switch>
+            </LayOut>
+        )
+        return (
+            <Router>
+                <Switch>
+                    <Route path='/login' component={WrappedNormalLogin}/>
+                    <Route path='/' render={props => LayoutRouter}/>
+                </Switch>
+            </Router>
+        )
+    }
+}
 
 ReactDOM.render(
-    <h1>Hello, world!</h1>,
+    <App/>,
     document.getElementById('app')
 );
